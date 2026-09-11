@@ -1,0 +1,8 @@
+{
+  "name": "alsabithal Games",
+  "description": "Free download pre-installed portable PC games from Steam and major publishers with fast direct mirrors and torrents.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

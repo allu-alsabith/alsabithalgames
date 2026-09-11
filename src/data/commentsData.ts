@@ -1,0 +1,72 @@
+import { Comment } from '../types';
+
+export const INITIAL_COMMENTS: Record<string, Comment[]> = {
+  'elden-ring-shadow-of-the-erdtree': [
+    {
+      id: 'c1',
+      gameId: 'elden-ring-shadow-of-the-erdtree',
+      author: 'TarnishedWarrior',
+      avatarColor: 'bg-amber-600',
+      date: 'Yesterday at 3:45 PM',
+      content: 'Downloaded the Buzzheavier link in less than 20 minutes on my gigabit connection. Extracted with NanaZip and it booted right up! Seamless co-op works flawlessly with my brother.',
+      likes: 34,
+      rating: 5,
+      isStaff: false,
+    },
+    {
+      id: 'c2',
+      gameId: 'elden-ring-shadow-of-the-erdtree',
+      author: 'AlsabithalAdmin',
+      avatarColor: 'bg-emerald-600',
+      date: 'Sept 5, 2026',
+      content: '📌 Note for DualSense controller users: if the game does not detect your controller, please run "DS4Windows" or enable Steam input in your background Steam client. Enjoy the Land of Shadow!',
+      likes: 68,
+      isPinned: true,
+      isStaff: true,
+    },
+    {
+      id: 'c3',
+      gameId: 'elden-ring-shadow-of-the-erdtree',
+      author: 'FrostMage',
+      avatarColor: 'bg-cyan-600',
+      date: 'Sept 6, 2026',
+      content: 'Can confirm patch 1.14.2 nerfed Radahn slightly, now the hitboxes are much cleaner. 10/10 upload, thank you alsabithal team!',
+      likes: 19,
+      rating: 5,
+    },
+  ],
+  'black-myth-wukong': [
+    {
+      id: 'c4',
+      gameId: 'black-myth-wukong',
+      author: 'DestinedOne',
+      avatarColor: 'bg-orange-600',
+      date: '12 hours ago',
+      content: 'The Denuvo bypass works smoothly! Make sure to install the game on an SSD otherwise shader stuttering can happen on HDD. Running at 90 FPS with DLSS on RTX 4070.',
+      likes: 52,
+      rating: 5,
+    },
+    {
+      id: 'c5',
+      gameId: 'black-myth-wukong',
+      author: 'MonkeyKingFan',
+      avatarColor: 'bg-yellow-600',
+      date: 'Yesterday at 8:12 PM',
+      content: 'Deluxe weapons and armor were automatically added to my inventory at the first shrine. Buzzheavier link was blazing fast.',
+      likes: 27,
+      rating: 5,
+    },
+  ],
+  'space-marine-2': [
+    {
+      id: 'c6',
+      gameId: 'space-marine-2',
+      author: 'Titus_Champion',
+      avatarColor: 'bg-blue-600',
+      date: '8 hours ago',
+      content: 'For the Emperor! The online fix allows full 3-player co-op campaign. Just invite through Spacewar overlay and you are good to purge Tyranids.',
+      likes: 41,
+      rating: 5,
+    },
+  ],
+};
