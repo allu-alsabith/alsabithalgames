@@ -23,17 +23,17 @@ export const RecentUpdatesView: React.FC<RecentUpdatesViewProps> = ({
   return (
     <div className="space-y-6">
       {/* View Header */}
-      <div className="rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 p-6 border border-cyan-900/40">
+      <div className="rounded-3xl mac-liquid-glass p-6 sm:p-7 border border-white/[0.12] shadow-2xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-bold border border-cyan-500/30">
-              <Clock className="w-3.5 h-3.5" />
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mac-liquid-pill text-cyan-300 text-xs font-bold border-cyan-400/30">
+              <Clock className="w-3.5 h-3.5 text-cyan-400" />
               Real-Time Tracking
             </div>
-            <h1 className="text-2xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               Recent Game Updates (Past 7 Days)
             </h1>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-300">
               Every day we test and upload new releases, hotfixes, and expansions. No installers required.
             </p>
           </div>
@@ -44,14 +44,14 @@ export const RecentUpdatesView: React.FC<RecentUpdatesViewProps> = ({
             <select
               value={filterGenre}
               onChange={(e) => setFilterGenre(e.target.value)}
-              className="bg-slate-950 border border-slate-700 text-xs text-slate-200 px-3 py-1.5 rounded-lg focus:outline-none focus:border-cyan-500"
+              className="mac-liquid-pill border-white/[0.1] text-xs text-slate-200 px-3.5 py-2 rounded-xl focus:outline-none focus:border-cyan-400 cursor-pointer"
             >
-              <option value="all">All Genres ({RECENT_UPDATES_DATA.length})</option>
-              <option value="action">Action</option>
-              <option value="rpg">RPG</option>
-              <option value="horror">Horror</option>
-              <option value="survival">Survival</option>
-              <option value="co-op">Co-op</option>
+              <option value="all" className="bg-slate-900 text-slate-200">All Genres ({RECENT_UPDATES_DATA.length})</option>
+              <option value="action" className="bg-slate-900 text-slate-200">Action</option>
+              <option value="rpg" className="bg-slate-900 text-slate-200">RPG</option>
+              <option value="horror" className="bg-slate-900 text-slate-200">Horror</option>
+              <option value="survival" className="bg-slate-900 text-slate-200">Survival</option>
+              <option value="co-op" className="bg-slate-900 text-slate-200">Co-op</option>
             </select>
           </div>
         </div>
@@ -66,7 +66,7 @@ export const RecentUpdatesView: React.FC<RecentUpdatesViewProps> = ({
             <div
               key={update.id}
               onClick={() => gameObj && onSelectGame(gameObj)}
-              className="group p-4 rounded-xl bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="group p-4 rounded-2xl mac-liquid-glass border border-white/[0.08] hover:border-cyan-400/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)] transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               {/* Left Column: Poster & Details */}
               <div className="flex items-start sm:items-center gap-3.5 min-w-0">
@@ -74,15 +74,15 @@ export const RecentUpdatesView: React.FC<RecentUpdatesViewProps> = ({
                   src={update.posterUrl}
                   alt={update.gameTitle}
                   referrerPolicy="no-referrer"
-                  className="w-20 sm:w-28 aspect-[16/9] object-cover rounded-lg border border-slate-700 shrink-0 group-hover:scale-105 transition-transform"
+                  className="w-20 sm:w-28 aspect-[16/9] object-cover rounded-xl border border-white/[0.1] shrink-0 group-hover:scale-105 transition-transform"
                 />
 
                 <div className="space-y-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors truncate">
+                    <h3 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
                       {update.gameTitle}
                     </h3>
-                    <span className="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[11px] font-mono font-semibold">
+                    <span className="px-2.5 py-0.5 rounded-full mac-liquid-pill text-cyan-300 border-cyan-400/30 text-[11px] font-mono font-semibold">
                       {update.version}
                     </span>
                   </div>
@@ -91,8 +91,8 @@ export const RecentUpdatesView: React.FC<RecentUpdatesViewProps> = ({
                     {update.changelogSummary}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500 font-medium">
-                    <span className="text-cyan-400/90 font-semibold">{update.timeAgo}</span>
+                  <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400 font-medium">
+                    <span className="text-cyan-400 font-semibold">{update.timeAgo}</span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
                       <User className="w-3 h-3 text-slate-400" />
@@ -114,7 +114,7 @@ export const RecentUpdatesView: React.FC<RecentUpdatesViewProps> = ({
                     e.stopPropagation();
                     if (gameObj) onSelectGame(gameObj);
                   }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl mac-liquid-accent text-white font-bold text-xs shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
                   Get Download

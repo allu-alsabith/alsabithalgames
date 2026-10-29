@@ -58,14 +58,17 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       <div className="flex flex-col justify-center">
         <div className="flex items-center gap-1.5 leading-none">
           <span
-            className={`font-extrabold tracking-tight text-white group-hover:text-emerald-300 transition-colors ${titleSizes[size]}`}
+            className={`font-black tracking-wider uppercase text-white group-hover:text-emerald-300 transition-colors ${titleSizes[size]}`}
           >
-            alsabithal<span className="text-emerald-400"> Games</span>
+            ALSABITHAL<span className="text-emerald-400">GAMES</span>
+          </span>
+          <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-widest hidden sm:inline-block">
+            Pre-Installed
           </span>
         </div>
         {showSubtitle && (
           <p className="text-[10px] text-slate-400 font-medium tracking-wide mt-1">
-            Portable PC Games Library
+            Free Pre-installed PC Games
           </p>
         )}
       </div>

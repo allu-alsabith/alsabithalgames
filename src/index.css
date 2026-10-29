@@ -2,32 +2,143 @@
 
 @layer base {
   :root {
-    --font-sans: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: "SF Mono", "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #080c14;
-    color: #e2e8f0;
+    background-color: #060911;
+    color: #f1f5f9;
     overflow-x: hidden;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Custom scrollbar */
+  /* macOS style smooth scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
   }
   ::-webkit-scrollbar-track {
-    background: #0b0f19;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: rgba(255, 255, 255, 0.3);
   }
+}
+
+/* =========================================================================
+   macOS Sequoia Liquid Glass Materials & Surfaces
+   ========================================================================= */
+
+/* Primary Liquid Glass Container (Modals, Major Panels, Hero Cards) */
+.mac-liquid-glass {
+  background: rgba(13, 19, 33, 0.62);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 
+    0 24px 60px -12px rgba(0, 0, 0, 0.65),
+    0 4px 16px -2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle Glass Surface (Tiles, Filter bars, Inner panels) */
+.mac-liquid-subtle {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 
+    0 8px 24px -4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+/* Elevated Glass Pill (Buttons, Tags, Controls) */
+.mac-liquid-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(175%);
+  -webkit-backdrop-filter: blur(16px) saturate(175%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 
+    0 6px 16px -2px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mac-liquid-pill:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 10px 24px -4px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Accent Emerald Liquid Glass (Primary CTAs, Active States) */
+.mac-liquid-accent {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.32) 0%, rgba(6, 182, 212, 0.2) 100%);
+  backdrop-filter: blur(24px) saturate(210%);
+  -webkit-backdrop-filter: blur(24px) saturate(210%);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  box-shadow: 
+    0 12px 28px -6px rgba(16, 185, 129, 0.35),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mac-liquid-accent:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.42) 0%, rgba(6, 182, 212, 0.28) 100%);
+  border-color: rgba(52, 211, 153, 0.65);
+  box-shadow: 
+    0 16px 36px -6px rgba(16, 185, 129, 0.45),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.55);
+  transform: translateY(-1px);
+}
+
+/* macOS Traffic Light Dots */
+.mac-dot-red {
+  background: #ff5f56;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 95, 86, 0.4);
+}
+.mac-dot-yellow {
+  background: #ffbd2e;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 0 6px rgba(255, 189, 46, 0.4);
+}
+.mac-dot-green {
+  background: #27c93f;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 0 6px rgba(39, 201, 63, 0.4);
+}
+
+/* Card Hover Shine */
+.mac-card-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.mac-card-sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  transition: left 0.75s ease;
+}
+.mac-card-sheen:hover::after {
+  left: 200%;
 }
 
 /* Custom glow effects for gaming aesthetics */
@@ -37,4 +148,16 @@
 
 .glow-cyan {
   box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+}
+
+.safe-area-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

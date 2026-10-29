@@ -296,7 +296,7 @@ export const userDataService = {
     try {
       for (let i = 0; i < localStorage.length; i++) {
         const k = localStorage.key(i);
-        if (k && (k.startsWith('alsabithal_') || k.startsWith('ankergames_'))) {
+        if (k && (k.startsWith('alsabithal_') || k.startsWith('alsabithalgames_'))) {
           localStorage.removeItem(k);
         }
       }

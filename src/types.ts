@@ -157,12 +157,35 @@ export type ViewTab =
   | 'trending' 
   | 'collections' 
   | 'updates' 
+  | 'coming-soon'
   | 'leaderboard' 
   | 'requests' 
   | 'publishers' 
   | 'faq' 
   | 'bookmarks'
   | 'ai-assistant';
+
+export interface ComingSoonGame {
+  id: string;
+  title: string;
+  expectedReleaseDate: string;
+  releaseQuarterOrYear: string;
+  status: 'Confirmed Date' | 'Expected 2025' | 'Expected 2026' | 'TBA / In Development';
+  developer: string;
+  publisher: string;
+  genres: string[];
+  platforms: string[];
+  bannerUrl: string;
+  posterUrl: string;
+  steamAppId?: number;
+  steamUrl?: string;
+  shortDescription: string;
+  anticipationScore: number;
+  wishlistsCount: number;
+  engine?: string;
+  dayOneCrackPrediction?: string;
+  featured?: boolean;
+}
 
 export type AiModelMode = 'fast' | 'smart' | 'complex';
 
@@ -192,17 +215,52 @@ export interface UserSettings {
   downloadNotificationSound: boolean;
 }
 
+export interface DirectCdnNode {
+  id: string;
+  name: string;
+  country: string;
+  flag: string;
+  bandwidth: string;
+  status: 'online' | 'optimal' | 'busy';
+  latencyMs: number;
+}
+
+export interface ActiveDownloadTask {
+  id: string;
+  gameId: string;
+  gameTitle: string;
+  gameCover: string;
+  version: string;
+  fileSize: string;
+  totalBytes: number;
+  downloadedBytes: number;
+  speedBytesPerSec: number;
+  speedFormatted: string;
+  progress: number; // 0 - 100
+  status: 'downloading' | 'paused' | 'completed' | 'cancelled' | 'error';
+  etaSeconds: number;
+  node: DirectCdnNode;
+  directUrl: string;
+  startTime: number;
+  completedTime?: number;
+  sha256Hash?: string;
+  cleanStatus?: string;
+  savedLocationName?: string;
+  saveMethod?: 'file_picker' | 'browser_default';
+}
+
 export interface DownloadRecord {
   id: string;
   gameId: string;
   gameTitle: string;
   gameCover: string;
   fileSize: string;
-  type: 'magnet' | 'direct' | 'torrent_file';
+  type: 'magnet' | 'direct' | 'torrent_file' | 'direct_alsabithal';
   mirrorName: string;
   downloadUrl?: string;
   timestamp: number;
   formattedDate: string;
+  nodeName?: string;
 }
 
 export interface UserDataBackup {

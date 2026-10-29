@@ -113,7 +113,7 @@ export const FaqView: React.FC<FaqViewProps> = ({ onOpenGuide }) => {
             Still need help with a game or error?
           </h3>
           <p className="text-xs text-slate-300">
-            Join the official alsabithal Games Discord server. Our community moderators and uploaders are ready to assist!
+            Join the official alsabithalgames Discord server. Our community moderators and uploaders are ready to assist!
           </p>
         </div>
 

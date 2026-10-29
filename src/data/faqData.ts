@@ -11,7 +11,7 @@ export const FAQ_DATA: FaqItem[] = [
     id: 'faq-2',
     category: 'antivirus',
     question: 'Why does Windows Defender flag steam_api64.dll or crack files?',
-    answer: 'This is known in the security industry as a "False Positive". Antivirus programs (like Microsoft Defender, Malwarebytes, or Norton) automatically flag modified Steam emulator DLLs (such as steam_api.dll, steam_api64.dll, Goldberg, or OnlineFix64.dll) as "HackTool", "Crack", or "Riskware" because they bypass Steam DRM to let the game run without an active purchase. Every game on alsabithal Games is manually tested and verified safe on a clean system before being uploaded. To prevent Windows Defender from quarantining these files, we advise adding the game extraction folder to your Antivirus Exclusions list.',
+    answer: 'This is known in the security industry as a "False Positive". Antivirus programs (like Microsoft Defender, Malwarebytes, or Norton) automatically flag modified Steam emulator DLLs (such as steam_api.dll, steam_api64.dll, Goldberg, or OnlineFix64.dll) as "HackTool", "Crack", or "Riskware" because they bypass Steam DRM to let the game run without an active purchase. Every game on alsabithalgames is manually tested and verified safe on a clean system before being uploaded. To prevent Windows Defender from quarantining these files, we advise adding the game extraction folder to your Antivirus Exclusions list.',
   },
   {
     id: 'faq-3',
@@ -46,8 +46,8 @@ export const FAQ_DATA: FaqItem[] = [
   {
     id: 'faq-8',
     category: 'general',
-    question: 'Is an account required to download games on alsabithal Games?',
-    answer: 'No! All game downloads are 100% free and do not require creating an account or providing an email. Creating a free account on alsabithal Games is only needed if you want to submit requests on the "Request Games" page, vote on community requests, leave comments, and bookmark games to your personal library.',
+    question: 'Is an account required to download games on alsabithalgames?',
+    answer: 'No! All game downloads are 100% free and do not require creating an account or providing an email. Creating a free account on alsabithalgames is only needed if you want to submit requests on the "Request Games" page, vote on community requests, leave comments, and bookmark games to your personal library.',
   },
   {
     id: 'faq-9',

@@ -34,7 +34,7 @@ export const PublishersView: React.FC<PublishersViewProps> = ({
               Game Developers & Publishers
             </h1>
             <p className="text-xs text-slate-400 max-w-xl">
-              Cataloging credited video game studios and publishers across the alsabithal Games PC library. Sourced directly from Steam and CS.RIN releases.
+              Cataloging credited video game studios and publishers across the alsabithalgames PC library. Sourced directly from Steam and CS.RIN releases.
             </p>
           </div>
 

@@ -21,16 +21,16 @@ export const DmcaModal: React.FC<DmcaModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-[#0f172a] border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto text-slate-200"
+        className="w-full max-w-2xl mac-liquid-glass border border-white/[0.14] rounded-3xl p-6 sm:p-8 shadow-[0_30px_80px_rgba(0,0,0,0.85)] space-y-5 max-h-[90vh] overflow-y-auto text-slate-200"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shadow-sm">
               <FileText className="w-5 h-5" />
             </div>
             <div>
@@ -38,29 +38,28 @@ export const DmcaModal: React.FC<DmcaModalProps> = ({ isOpen, onClose }) => {
               <p className="text-xs text-slate-400">Digital Millennium Copyright Act Compliance</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full mac-dot-red inline-block cursor-pointer" onClick={onClose} />
+            <span className="w-3 h-3 rounded-full mac-dot-yellow inline-block" />
+            <span className="w-3 h-3 rounded-full mac-dot-green inline-block" />
+          </div>
         </div>
 
         <div className="text-xs text-slate-300 space-y-3 leading-relaxed">
           <p>
-            alsabithal Games respects the intellectual property of others and complies with the <strong>Digital Millennium Copyright Act (17 U.S.C. § 512)</strong>. It is our policy to respond expeditiously to clear notices of alleged copyright infringement.
+            alsabithalgames respects the intellectual property of others and complies with the <strong>Digital Millennium Copyright Act (17 U.S.C. § 512)</strong>. It is our policy to respond expeditiously to clear notices of alleged copyright infringement.
           </p>
           <p>
-            alsabithal Games operates as an informational directory and search index. We do not host copyrighted game binaries on our primary web servers; download links point to third-party cloud file hosts (Buzzheavier, Gofile, 1fichier, MegaDB).
+            alsabithalgames operates as an informational directory and search index. We do not host copyrighted game binaries on our primary web servers; download links point to third-party cloud file hosts (Buzzheavier, Gofile, 1fichier, MegaDB).
           </p>
 
-          <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-            <h4 className="font-bold text-amber-400 text-xs uppercase tracking-wider">
+          <div className="p-4 rounded-2xl mac-liquid-subtle space-y-2">
+            <h4 className="font-bold text-amber-300 text-xs uppercase tracking-wider">
               Required Information for DMCA Notice:
             </h4>
             <ul className="list-disc pl-5 space-y-1 text-[11px] text-slate-300">
               <li>Identification of the copyrighted work claimed to have been infringed.</li>
-              <li>Identification of the material or URL on alsabithal Games that is claimed to be infringing.</li>
+              <li>Identification of the material or URL on alsabithalgames that is claimed to be infringing.</li>
               <li>Your contact information (full name, company, email address, physical address).</li>
               <li>A statement of good faith belief that the disputed use is not authorized by the copyright owner.</li>
               <li>A statement made under penalty of perjury that the information is accurate and you are authorized to act on behalf of the owner.</li>
@@ -68,7 +67,7 @@ export const DmcaModal: React.FC<DmcaModalProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
 
-          <p className="text-slate-400 text-[11px]">
+          <p className="text-slate-300 text-[11px]">
             Send all official DMCA requests directly to our designated agent at:{' '}
             <a href="mailto:amhereitsmeal@gmail.com" className="text-emerald-400 hover:underline font-mono font-bold">
               amhereitsmeal@gmail.com
@@ -78,13 +77,13 @@ export const DmcaModal: React.FC<DmcaModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Quick Takedown Form */}
-        <div className="pt-2 border-t border-slate-800">
+        <div className="pt-2 border-t border-white/[0.08]">
           <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 mb-3">
             Submit Takedown Request Online
           </h3>
 
           {submitted ? (
-            <div className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-3">
+            <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-xs text-emerald-300 flex items-center gap-3">
               <Check className="w-5 h-5 text-emerald-400 shrink-0" />
               <div>
                 <p className="font-bold">Notice Received</p>
@@ -97,49 +96,49 @@ export const DmcaModal: React.FC<DmcaModalProps> = ({ isOpen, onClose }) => {
             <form onSubmit={handleSubmit} className="space-y-3 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-400 font-medium mb-1">Copyright Owner / Entity</label>
+                  <label className="block text-slate-300 font-medium mb-1">Copyright Owner / Entity</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Bandai Namco Entertainment"
                     value={ownerName}
                     onChange={(e) => setOwnerName(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-amber-500"
+                    className="w-full px-3 py-2 rounded-xl mac-liquid-pill text-white focus:outline-none focus:border-amber-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-medium mb-1">Contact Email</label>
+                  <label className="block text-slate-300 font-medium mb-1">Contact Email</label>
                   <input
                     type="email"
                     required
                     placeholder="amhereitsmeal@gmail.com"
                     defaultValue="amhereitsmeal@gmail.com"
-                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-amber-500"
+                    className="w-full px-3 py-2 rounded-xl mac-liquid-pill text-white focus:outline-none focus:border-amber-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 font-medium mb-1">Infringing Game Page URL or Title</label>
+                <label className="block text-slate-300 font-medium mb-1">Infringing Game Page URL or Title</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Elden Ring or Game URL"
                   value={infringingUrl}
                   onChange={(e) => setInfringingUrl(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2 rounded-xl mac-liquid-pill text-white focus:outline-none focus:border-amber-400"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-400 font-medium mb-1">Statement of Ownership & Good Faith</label>
+                <label className="block text-slate-300 font-medium mb-1">Statement of Ownership & Good Faith</label>
                 <textarea
                   rows={2}
                   required
                   placeholder="I declare under penalty of perjury that I am authorized to act on behalf of the copyright holder..."
                   value={workDescription}
                   onChange={(e) => setWorkDescription(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 focus:outline-none focus:border-amber-500 resize-none"
+                  className="w-full px-3 py-2 rounded-xl mac-liquid-pill text-white focus:outline-none focus:border-amber-400 resize-none"
                 />
               </div>
 
@@ -147,13 +146,13 @@ export const DmcaModal: React.FC<DmcaModalProps> = ({ isOpen, onClose }) => {
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  className="px-4 py-2 rounded-xl mac-liquid-pill text-slate-300 hover:text-white cursor-pointer"
                 >
                   Close
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/30 active:scale-95 transition-all cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   Transmit Takedown

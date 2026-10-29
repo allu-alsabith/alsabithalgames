@@ -69,15 +69,15 @@ const PRESET_PROMPTS = [
     label: 'Recommend Similar Games',
     icon: Gamepad2,
     color: 'text-pink-400 border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20',
-    prompt: 'Can you recommend 5 top PC games available on alsabithal Games that are similar in gameplay, vibe, or genre to this game?',
+    prompt: 'Can you recommend 5 top PC games available on alsabithalgames that are similar in gameplay, vibe, or genre to this game?',
   },
 ];
 
 const INITIAL_GREETING: ChatMessage = {
   id: 'msg-init',
   role: 'model',
-  content: `### Welcome to alsabithal Games AI Assistant! 🎮
-I am your dedicated gaming and technical support companion on **alsabithal Games**.
+  content: `### Welcome to alsabithalgames AI Assistant! 🎮
+I am your dedicated gaming and technical support companion on **alsabithalgames**.
 
 Here is what I can assist you with:
 * **PC System Compatibility**: Check your CPU, GPU, and RAM against game requirements for realistic FPS estimates.

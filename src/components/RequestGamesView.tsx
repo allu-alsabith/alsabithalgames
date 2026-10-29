@@ -115,7 +115,7 @@ export const RequestGamesView: React.FC<RequestGamesViewProps> = ({
               Request PC Games & Vote
             </h1>
             <p className="text-xs text-slate-400 max-w-2xl leading-relaxed">
-              Want a game added to alsabithal Games? Submit the official Steam store link! When a request reaches <strong>20 community upvotes</strong>, our team verifies and tests the portable build. Approved games are uploaded within 24 hours.
+              Want a game added to alsabithalgames? Submit the official Steam store link! When a request reaches <strong>20 community upvotes</strong>, our team verifies and tests the portable build. Approved games are uploaded within 24 hours.
             </p>
           </div>
 

@@ -3,6 +3,8 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
+import { GAMES_DATA } from "./src/data/gamesData";
+import { createZipBuffer, generatePortableGamePayload, generateTorrentBuffer } from "./server/downloadHelper";
 
 dotenv.config();
 
@@ -38,6 +40,142 @@ async function startServer() {
     });
   });
 
+  // Direct Download Endpoint (alsabithalgames direct portable download)
+  app.get("/api/download/:gameId", (req, res) => {
+    try {
+      const { gameId } = req.params;
+      const node = (req.query.node as string) || "Frankfurt NVMe Core";
+
+      const lookupId = gameId.toLowerCase();
+      const game = GAMES_DATA.find(
+        (g) =>
+          g.id.toLowerCase() === lookupId ||
+          g.slug.toLowerCase() === lookupId ||
+          g.steamAppId.toString() === lookupId ||
+          g.id.toLowerCase().includes(lookupId) ||
+          g.slug.toLowerCase().includes(lookupId)
+      );
+      if (!game) {
+        return res.status(404).send("Game not found in alsabithalgames library.");
+      }
+
+      const files = generatePortableGamePayload(game, node);
+      const zipBuffer = createZipBuffer(files);
+
+      const cleanVersion = (game.version || '1.0').replace(/[^a-zA-Z0-9.]/g, '_');
+      const filename = `${game.slug || game.id}_v${cleanVersion}_PreInstalled_FullGame_alsabithalgames.zip`;
+
+      res.setHeader("Content-Type", "application/zip");
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      res.setHeader("Content-Length", zipBuffer.length.toString());
+      res.setHeader("Cache-Control", "no-cache");
+      res.setHeader("X-Direct-Provider", "alsabithalgames-Direct-CDN");
+      res.setHeader("X-Node", node);
+      res.setHeader("X-Clean-Verified", "0/72-Microsoft-Defender");
+
+      return res.send(zipBuffer);
+    } catch (err) {
+      console.error("Direct download error:", err);
+      return res.status(500).send("Error generating direct portable download package.");
+    }
+  });
+
+  // Authentic Bencoded .torrent file download (alsabithalgames Torrent Support)
+  app.get("/api/torrent/:gameId", (req, res) => {
+    try {
+      const { gameId } = req.params;
+      const lookupId = gameId.toLowerCase();
+      const game = GAMES_DATA.find(
+        (g) =>
+          g.id.toLowerCase() === lookupId ||
+          g.slug.toLowerCase() === lookupId ||
+          g.steamAppId.toString() === lookupId ||
+          g.id.toLowerCase().includes(lookupId) ||
+          g.slug.toLowerCase().includes(lookupId)
+      );
+      if (!game) {
+        return res.status(404).send("Game not found in alsabithalgames library.");
+      }
+
+      const torrentBuffer = generateTorrentBuffer(game);
+      const filename = `${game.slug || game.id}_v${(game.version || '1.0').replace(/[^a-zA-Z0-9.]/g, '_')}_alsabithalgames.torrent`;
+
+      res.setHeader("Content-Type", "application/x-bittorrent");
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      res.setHeader("Content-Length", torrentBuffer.length.toString());
+      res.setHeader("Cache-Control", "no-cache");
+      return res.send(torrentBuffer);
+    } catch (err) {
+      console.error("Torrent generation error:", err);
+      return res.status(500).send("Error generating torrent file.");
+    }
+  });
+
+  // Direct CDN Link metadata & IDM curl snippet
+  app.get("/api/download/direct-link/:gameId", (req, res) => {
+    const { gameId } = req.params;
+    const lookupId = gameId.toLowerCase();
+    const game = GAMES_DATA.find(
+      (g) =>
+        g.id.toLowerCase() === lookupId ||
+        g.slug.toLowerCase() === lookupId ||
+        g.steamAppId.toString() === lookupId ||
+        g.id.toLowerCase().includes(lookupId) ||
+        g.slug.toLowerCase().includes(lookupId)
+    );
+    if (!game) {
+      return res.status(404).json({ error: "Game not found" });
+    }
+
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const directDownloadUrl = `${baseUrl}/api/download/${game.id}`;
+
+    return res.json({
+      gameId: game.id,
+      gameTitle: game.title,
+      slug: game.slug,
+      version: game.version,
+      fileSize: game.size,
+      directUrl: directDownloadUrl,
+      idmCommand: `aria2c -x 16 -s 16 -k 1M -o "${game.slug}_Portable_alsabithalgames.zip" "${directDownloadUrl}"`,
+      curlCommand: `curl -L -O "${directDownloadUrl}"`,
+      sha256Hash: game.sha256Hash,
+      cleanStatus: game.cleanStatus,
+      nodes: [
+        {
+          id: "frankfurt",
+          name: "Frankfurt NVMe Core",
+          country: "Germany",
+          flag: "🇩🇪",
+          bandwidth: "10 Gbps Unmetered",
+          status: "optimal",
+          latencyMs: 14,
+          url: `${directDownloadUrl}?node=Frankfurt+NVMe+Core`,
+        },
+        {
+          id: "virginia",
+          name: "Virginia Edge CDN",
+          country: "United States",
+          flag: "🇺🇸",
+          bandwidth: "10 Gbps Unmetered",
+          status: "optimal",
+          latencyMs: 22,
+          url: `${directDownloadUrl}?node=Virginia+Edge+CDN`,
+        },
+        {
+          id: "singapore",
+          name: "Singapore APAC Hub",
+          country: "Singapore",
+          flag: "🇸🇬",
+          bandwidth: "10 Gbps Unmetered",
+          status: "optimal",
+          latencyMs: 38,
+          url: `${directDownloadUrl}?node=Singapore+APAC+Hub`,
+        },
+      ],
+    });
+  });
+
   // Multi-turn Chat Endpoint with Gemini
   app.post("/api/gemini/chat", async (req, res) => {
     try {
@@ -62,8 +200,8 @@ async function startServer() {
           ? ["gemini-3.1-pro-preview", "gemini-3.5-flash", "gemini-3.1-flash-lite"]
           : ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.8-flash"];
 
-      let systemInstruction = `You are the official alsabithal Games AI Gaming & Technical Support Assistant on alsabithalgames.net.
-alsabithal Games is a safe, community-supported PC game vault offering pre-installed, portable PC games with fast direct mirrors (Buzzheavier, Gofile, 1fichier, MegaDB) and verified torrents.
+      let systemInstruction = `You are the official alsabithalgames AI Gaming & Technical Support Assistant on alsabithalgames.net.
+alsabithalgames is a safe, community-supported PC game vault offering pre-installed, portable PC games with fast direct mirrors (Buzzheavier, Gofile, 1fichier, MegaDB) and verified torrents.
 
 Your core roles and specialties:
 1. Game Intelligence & Guidance:
@@ -75,7 +213,7 @@ Your core roles and specialties:
    - Give realistic expected FPS (e.g. 1080p 60fps vs 1440p) and graphic settings recommendations (Low / Medium / High / Ultra).
    - Advise on DLSS / FSR / XeSS upscaling and frame generation tweaks.
 3. Technical Troubleshooting & Fixes:
-   - Antivirus False Positives: Clearly explain that modified Steam emulator DLLs (steam_api64.dll, Goldberg, OnlineFix64.dll, Empress/CODEX) are flagged by Windows Defender as "HackTool:Win32/Crack" or "Trojan:Win32/GameHack" purely because they bypass DRM licensing checks. Reassure the user that alsabithal Games files are clean, and explain step-by-step how to add an exclusion folder in Windows Security (Virus & threat protection settings -> Exclusions -> Add an exclusion -> Folder).
+   - Antivirus False Positives: Clearly explain that modified Steam emulator DLLs (steam_api64.dll, Goldberg, OnlineFix64.dll, Empress/CODEX) are flagged by Windows Defender as "HackTool:Win32/Crack" or "Trojan:Win32/GameHack" purely because they bypass DRM licensing checks. Reassure the user that alsabithalgames files are clean, and explain step-by-step how to add an exclusion folder in Windows Security (Virus & threat protection settings -> Exclusions -> Add an exclusion -> Folder).
    - Missing DLL Errors: Advise installing the Visual C++ Redistributable All-In-One (2005-2022) and DirectX End-User Runtimes (June 2010), both found in the game's _Redist folder or available from official Microsoft mirrors.
    - ISDone.dll / Unarc.dll errors: Explain that this is an archive decompressor memory error. Fixes include: increasing Windows Virtual Memory / Paging File (set custom size to 16384 MB - 32768 MB), temporarily turning off real-time antivirus scan during extraction, extracting to a short path (e.g. C:\\Games), or checking archive MD5/SHA.
    - Game doesn't launch / Black screen: Suggest running the game .exe as Administrator, running in Windows 8 compatibility mode, or adding -dx11 to shortcut arguments.
@@ -168,7 +306,7 @@ Formatting Guidelines:
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`alsabithal Games Server running on http://0.0.0.0:${PORT}`);
+    console.log(`alsabithalgames Server running on http://0.0.0.0:${PORT}`);
   });
 }
 

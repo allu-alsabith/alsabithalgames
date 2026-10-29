@@ -85,49 +85,61 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-3 sm:pt-20 px-2 sm:px-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-[#0d131f] border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
+        className="w-full max-w-2xl mac-liquid-glass rounded-3xl shadow-[0_30px_70px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[80vh] border border-white/[0.14]"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* macOS Window Top Bar */}
+        <div className="px-4 py-2.5 bg-white/[0.03] border-b border-white/[0.06] flex items-center justify-between select-none">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full mac-dot-red inline-block" />
+            <span className="w-3 h-3 rounded-full mac-dot-yellow inline-block" />
+            <span className="w-3 h-3 rounded-full mac-dot-green inline-block" />
+            <span className="ml-2 text-xs font-mono text-slate-400">Spotlight Search</span>
+          </div>
+          <span className="text-[11px] font-mono text-slate-500">Esc to close</span>
+        </div>
+
         {/* Search Bar Input */}
-        <div className="p-4 border-b border-slate-800 flex items-center gap-3 bg-slate-900/80">
+        <div className="p-3.5 sm:p-4 border-b border-white/[0.08] flex items-center gap-3 bg-white/[0.02]">
           <Search className="w-5 h-5 text-emerald-400 shrink-0" />
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search titles, genres, or Steam App ID (e.g. 1245620, Elden Ring)..."
+            placeholder="Search titles, NFS, GTA, Steam ID..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full bg-transparent text-sm text-slate-100 placeholder-slate-500 focus:outline-none"
+            className="w-full bg-transparent text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none py-1"
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="text-slate-400 hover:text-white text-xs px-2 py-0.5 rounded bg-slate-800 transition-colors"
+              className="text-slate-300 hover:text-white text-xs px-3 py-1.5 rounded-xl mac-liquid-pill transition-colors min-h-[36px] flex items-center active:scale-95 cursor-pointer"
             >
               Clear
             </button>
           )}
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white transition-colors"
+            aria-label="Close search"
+            className="p-2 rounded-xl text-slate-300 hover:text-white mac-liquid-pill transition-colors min-w-[38px] min-h-[38px] flex items-center justify-center active:scale-90 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Quick Tag Suggestions */}
-        <div className="px-4 py-2 border-b border-slate-800/60 bg-slate-950/60 flex items-center gap-1.5 overflow-x-auto text-[11px]">
-          <span className="text-slate-500 font-semibold uppercase text-[10px] shrink-0">Quick Search:</span>
+        <div className="px-3.5 sm:px-4 py-2.5 border-b border-white/[0.06] bg-white/[0.01] flex items-center gap-1.5 overflow-x-auto text-xs custom-scrollbar no-scrollbar touch-pan-x">
+          <span className="text-slate-400 font-semibold uppercase text-[10px] shrink-0">Quick:</span>
           {quickTags.map((tag) => (
             <button
               key={tag}
               onClick={() => setQuery(tag)}
-              className="px-2 py-0.5 rounded bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-emerald-400 border border-slate-800 transition-colors shrink-0"
+              className="px-3 py-1 rounded-xl mac-liquid-pill text-slate-200 hover:text-white transition-all shrink-0 min-h-[32px] flex items-center active:scale-95 cursor-pointer"
             >
               {tag}
             </button>
@@ -135,10 +147,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         </div>
 
         {/* Results List */}
-        <div className="overflow-y-auto p-2 divide-y divide-slate-800/60">
-          <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center justify-between">
+        <div className="overflow-y-auto p-2 divide-y divide-white/[0.05] custom-scrollbar">
+          <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
             <span>{query.trim() === '' ? 'Top Trending Games' : `Results (${results.length})`}</span>
-            {results.length > 0 && <span className="text-[10px] text-slate-500 font-mono">Press Enter for 1st result</span>}
+            {results.length > 0 && <span className="text-[10px] text-emerald-400/90 font-mono">Press Enter for 1st result</span>}
           </div>
 
           {results.length === 0 ? (
@@ -156,47 +168,47 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   onSelectGame(game);
                   onClose();
                 }}
-                className="group p-3 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between gap-3 transition-colors"
+                className="group p-3 sm:p-3.5 rounded-2xl hover:bg-white/[0.08] active:bg-white/[0.12] cursor-pointer flex items-center justify-between gap-3 transition-all min-h-[58px] touch-manipulation"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <img
                     src={game.posterUrl}
                     alt={game.title}
                     referrerPolicy="no-referrer"
-                    className="w-16 aspect-[16/9] object-cover rounded-lg border border-slate-700 shrink-0 group-hover:scale-105 transition-transform"
+                    className="w-16 sm:w-20 aspect-[16/9] object-cover rounded-xl border border-white/[0.15] shrink-0 group-hover:scale-105 transition-transform"
                   />
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <h4 className="font-bold text-xs sm:text-sm text-slate-200 group-hover:text-emerald-400 transition-colors truncate">
+                      <h4 className="font-bold text-xs sm:text-sm text-white group-hover:text-emerald-300 transition-colors truncate">
                         {game.title}
                       </h4>
                       {game.hasOnlineFix && (
-                        <span className="px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold shrink-0">
+                        <span className="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 text-[10px] font-bold shrink-0">
                           Online Fix
                         </span>
                       )}
                     </div>
                     <div className="flex flex-wrap items-center gap-2 mt-1 text-[11px] text-slate-400 font-mono">
-                      <span className="text-emerald-400">{game.size}</span>
+                      <span className="text-emerald-400 font-semibold">{game.size}</span>
                       <span>•</span>
                       <span>Steam #{game.steamAppId}</span>
-                      <span>•</span>
-                      <span>{game.version.split('+')[0]}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="hidden sm:inline">{game.version.split('+')[0]}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 shrink-0">
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                   <div className="hidden sm:flex flex-col items-end text-xs">
                     <span className="flex items-center gap-1 text-amber-400 font-bold">
                       <Star className="w-3 h-3 fill-amber-400" />
                       {game.rating.toFixed(1)}
                     </span>
-                    <span className="text-[10px] text-slate-500">
+                    <span className="text-[10px] text-slate-400">
                       {(game.downloadsCount / 1000).toFixed(0)}k DLs
                     </span>
                   </div>
-                  <div className="p-2 rounded-lg bg-emerald-600/20 group-hover:bg-emerald-600 text-emerald-400 group-hover:text-white transition-colors">
+                  <div className="min-w-[36px] min-h-[36px] p-2 rounded-xl mac-liquid-pill group-hover:mac-liquid-accent text-emerald-300 group-hover:text-white transition-all flex items-center justify-center">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>

@@ -17,21 +17,21 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenAiAssistant,
 }) => {
   return (
-    <footer className="border-t border-slate-800/80 bg-[#060910] text-slate-400 text-sm mt-16">
+    <footer className="border-t border-white/[0.08] mac-liquid-glass text-slate-400 text-sm mt-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Col 1: Brand */}
           <div className="lg:col-span-2 space-y-4">
             <BrandLogo size="md" showSubtitle={false} />
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
               The premier platform for pre-installed, portable PC games. Direct downloads from top-tier cloud mirrors with unthrottled speeds and verified clean files.
             </p>
             <div className="flex items-center gap-2 pt-1">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mac-liquid-pill text-emerald-300 text-xs font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Microsoft Defender Tested
               </div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mac-liquid-pill text-cyan-300 text-xs font-semibold">
                 Portable / No Installers
               </div>
             </div>
@@ -59,6 +59,17 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>Recent Updates</span>
                   <span className="text-[10px] px-1 py-0.2 bg-cyan-500/20 text-cyan-400 rounded">
                     7 Days
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onSelectTab('coming-soon')}
+                  className="hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+                >
+                  <span>Coming Soon</span>
+                  <span className="text-[10px] px-1 py-0.2 bg-teal-500/20 text-teal-300 rounded font-semibold">
+                    New
                   </span>
                 </button>
               </li>
@@ -194,11 +205,11 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Disclaimer section */}
         <div className="pt-8 border-t border-slate-800/80 text-[11px] text-slate-500 space-y-2">
           <p className="leading-relaxed">
-            <strong className="text-slate-400">Legal Disclaimer:</strong> alsabithal Games is not affiliated with, endorsed by, or sponsored by Steam or Valve Corporation. All trademarks, registered trademarks, product names, screenshots, and company names mentioned herein are the property of their respective owners. alsabithal Games indexes and mirrors pre-installed software for archival and educational compatibility purposes. We respect intellectual property rights and respond promptly to verifiable DMCA takedown notices sent to our designated agent.
+            <strong className="text-slate-400">Legal Disclaimer:</strong> alsabithalgames is not affiliated with, endorsed by, or sponsored by Steam or Valve Corporation. All trademarks, registered trademarks, product names, screenshots, and company names mentioned herein are the property of their respective owners. alsabithalgames indexes and mirrors pre-installed software for archival and educational compatibility purposes. We respect intellectual property rights and respond promptly to verifiable DMCA takedown notices sent to our designated agent.
           </p>
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-900 text-slate-500 text-xs">
             <div>
-              © 2026 <span className="text-slate-400">alsabithal Games</span> — All rights reserved.
+              © 2026 <span className="text-slate-400">alsabithalgames</span> — All rights reserved.
             </div>
             <div className="flex items-center gap-4 text-xs">
               <button onClick={onOpenDmca} className="hover:text-slate-300">

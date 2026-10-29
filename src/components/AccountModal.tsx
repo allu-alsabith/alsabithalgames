@@ -165,17 +165,28 @@ export const AccountModal: React.FC<AccountModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-[#0b121e] border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] text-slate-200"
+        className="w-full max-w-2xl mac-liquid-glass border border-white/[0.14] rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col max-h-[90vh] text-slate-200"
         onClick={(e) => e.stopPropagation()}
         id="user-account-modal"
       >
+        {/* macOS Window Titlebar */}
+        <div className="px-4 py-2 bg-white/[0.03] border-b border-white/[0.06] flex items-center justify-between select-none">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full mac-dot-red inline-block cursor-pointer" onClick={onClose} />
+            <span className="w-3 h-3 rounded-full mac-dot-yellow inline-block" />
+            <span className="w-3 h-3 rounded-full mac-dot-green inline-block" />
+            <span className="ml-2 text-xs font-mono text-slate-400">Settings & Profile</span>
+          </div>
+          <span className="text-[11px] font-mono text-slate-500">Esc to close</span>
+        </div>
+
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 border-b border-slate-800 bg-slate-900/60 flex items-center justify-between gap-3">
+        <div className="p-4 sm:p-5 border-b border-white/[0.08] bg-white/[0.02] flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div
-              className={`w-10 h-10 rounded-xl ${
+              className={`w-10 h-10 rounded-2xl ${
                 profile.avatarColor || 'bg-emerald-600'
-              } text-white font-black flex items-center justify-center text-base shadow-md uppercase shrink-0`}
+              } text-white font-black flex items-center justify-center text-base shadow-md uppercase shrink-0 border border-white/20`}
             >
               {currentUsername ? currentUsername.charAt(0) : 'G'}
             </div>
@@ -184,7 +195,7 @@ export const AccountModal: React.FC<AccountModalProps> = ({
                 <h2 className="text-base sm:text-lg font-bold text-white tracking-tight">
                   {currentUsername}
                 </h2>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold border border-emerald-500/30 flex items-center gap-1">
+                <span className="px-2.5 py-0.5 rounded-full mac-liquid-pill text-emerald-300 text-[10px] font-bold flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3" />
                   {currentIsLoggedIn ? 'Verified User' : 'Local Guest'}
                 </span>
@@ -197,14 +208,14 @@ export const AccountModal: React.FC<AccountModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-2 rounded-2xl mac-liquid-pill text-slate-300 hover:text-white transition-all cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex border-b border-slate-800/90 bg-slate-950/60 px-4 sm:px-6 overflow-x-auto text-xs font-semibold gap-2 sm:gap-4 no-scrollbar">
+        <div className="flex border-b border-white/[0.08] mac-liquid-subtle px-4 sm:px-6 overflow-x-auto text-xs font-semibold gap-2 sm:gap-4 no-scrollbar">
           <button
             onClick={() => setActiveTab('profile')}
             className={`py-3 px-2 border-b-2 transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
